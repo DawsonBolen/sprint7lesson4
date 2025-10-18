@@ -1,0 +1,36 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Env & local config
+.env
+.env.*
+!.env.example
+
+# Build / coverage / caches
+dist/
+build/
+coverage/
+.cache/
+.parcel-cache/
+.tmp/
+.tsbuildinfo
+
+# SQLite databases (keep local only)
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+*.db-journal
+# (If you want one DB tracked, comment it out above and whitelist it)
+# !seed.sqlite3
+
+# Editors / tooling
+.vscode/
+.idea/
+.eslintcache
