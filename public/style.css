@@ -34,7 +34,7 @@ body {
         radial-gradient(1200px 800px at -10% 20%, #f9f5ff 0%, transparent 55%),
         var(--light);
     overflow: hidden !important;
-    /* page itself won't scroll */
+
 }
 
 #form-main {
@@ -117,14 +117,12 @@ body {
     background-color: var(--hover);
 }
 
-/* If you have a login overlay, make sure it's hidden when showing todos */
+
 #form-main[style*="display: none"] {
     display: none !important;
 }
 
-/* =========================
-   LAYOUT (SCROLLING GUARANTEE)
-   ========================= */
+
 #todo-main {
     position: fixed !important;
     /* fill viewport */
@@ -148,11 +146,8 @@ body {
 
 #todo-container {
     flex: 1 1 auto !important;
-    /* takes remaining height */
     min-height: 0 !important;
-    /* CRITICAL for flex overflow */
     overflow-y: auto !important;
-    /* the ONLY scroll area */
     width: 100%;
     max-width: 760px;
     margin: 0 auto 8px;
@@ -173,11 +168,7 @@ body {
     background: transparent;
 }
 
-/* =========================
-   VISUAL STYLES (YOUR COLORS)
-   ========================= */
 
-/* Add bar styles */
 #add-todo {
     background: var(--light);
     border: 1px solid var(--border);
@@ -236,20 +227,17 @@ body {
     box-shadow: 0 0 0 4px color-mix(in oklab, var(--focus) 35%, transparent), var(--shadow-md);
 }
 
-/* If you're using the SVG icon */
 #circ,
 #pat {
     stroke: var(--light);
 }
 
-/* List container (inside the scroll wrapper) */
 #todos {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-/* Todo item card */
 .toDo {
     display: flex;
     justify-content: space-between;
@@ -276,7 +264,6 @@ body {
     gap: 12px;
 }
 
-/* Themed checkbox */
 .check-and-text input[type="checkbox"] {
     width: 20px;
     height: 20px;
@@ -284,7 +271,6 @@ body {
     cursor: pointer;
 }
 
-/* Done state */
 .check-and-text input[type="checkbox"]:checked+span {
     color: var(--text2);
     text-decoration: line-through;
@@ -299,7 +285,6 @@ body {
     color: var(--text);
 }
 
-/* Delete button */
 .delete-todo {
     border: 1px solid var(--border);
     background: var(--light);
@@ -332,7 +317,6 @@ body {
 }
 
 
-/* Small screens */
 @media (max-width: 520px) {
     #add-todo {
         padding: 6px;
