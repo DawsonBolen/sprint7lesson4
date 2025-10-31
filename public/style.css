@@ -1,0 +1,353 @@
+:root {
+    --light: #FFFFFF;
+    --primary: #9B5DE5;
+    --hover: #B17CF0;
+    --text: #1A1A1A;
+    --text2: #5C5470;
+    --background-contrast: #F8F7FB;
+    --error: #E63946;
+    --focus: #D6B1FF;
+    --success: #4ADE80;
+    --border: #E4E0F2;
+
+    --shadow-sm: 0 2px 10px rgba(27, 17, 66, 0.06);
+    --shadow-md: 0 8px 30px rgba(27, 17, 66, 0.10);
+    --radius: 14px;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: "Roboto", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(1200px 800px at 80% -20%, #efe9ff 0%, transparent 60%),
+        radial-gradient(1200px 800px at -10% 20%, #f9f5ff 0%, transparent 55%),
+        var(--light);
+    overflow: hidden !important;
+    /* page itself won't scroll */
+}
+
+#form-main {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    max-width: 500px;
+    width: 100%;
+    background-color: var(--background-contrast);
+    border-radius: 10px;
+    padding: 4rem 2rem;
+}
+
+
+#form-main h2 {
+    color: var(--text);
+
+
+    margin-bottom: 5px;
+}
+
+
+#create-account-form,
+#login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.form-input {
+    width: 100%;
+    height: 40px;
+    padding: 5px;
+    color: var(--text);
+    border: 1px solid var(--border);
+
+
+}
+
+
+.form-input:focus {
+    outline: 2px solid var(--focus);
+}
+
+
+.form-link {
+    color: var(--text);
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+
+.form-link span {
+    color: var(--text2);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.form-link span:hover {
+    color: var(--success);
+}
+
+
+.form-btn {
+    width: 100%;
+    height: 40px;
+    background-color: var(--primary);
+    color: var(--light);
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+
+.form-btn:hover {
+    background-color: var(--hover);
+}
+
+/* If you have a login overlay, make sure it's hidden when showing todos */
+#form-main[style*="display: none"] {
+    display: none !important;
+}
+
+/* =========================
+   LAYOUT (SCROLLING GUARANTEE)
+   ========================= */
+#todo-main {
+    position: fixed !important;
+    /* fill viewport */
+    inset: 0 !important;
+    display: flex;
+    flex-direction: column !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+    gap: 12px;
+}
+
+#add-todo {
+    flex: 0 0 auto !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 760px;
+    margin: 10px auto;
+}
+
+#todo-container {
+    flex: 1 1 auto !important;
+    /* takes remaining height */
+    min-height: 0 !important;
+    /* CRITICAL for flex overflow */
+    overflow-y: auto !important;
+    /* the ONLY scroll area */
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+}
+
+#todo-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+#todo-container::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--primary) 25%, #ccc);
+    border-radius: 8px;
+}
+
+#todo-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* =========================
+   VISUAL STYLES (YOUR COLORS)
+   ========================= */
+
+/* Add bar styles */
+#add-todo {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 2px);
+    box-shadow: var(--shadow-sm);
+    padding: 8px;
+}
+
+#add-todo input {
+    flex: 1;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) - 6px);
+    font-size: 16px;
+    outline: none;
+    background: var(--background-contrast);
+    transition: border-color 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+
+#add-todo input::placeholder {
+    color: #9a94ad;
+}
+
+#add-todo input:focus {
+    border-color: var(--focus);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--focus) 30%, transparent);
+    background: #fff;
+}
+
+#add-todo button {
+    background: var(--primary);
+    border: none;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 48px;
+    border-radius: calc(var(--radius) - 6px);
+    cursor: pointer;
+    transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
+    box-shadow: var(--shadow-sm);
+    color: var(--light);
+}
+
+#add-todo button:hover {
+    background: var(--hover);
+    transform: translateY(-1px);
+}
+
+#add-todo button:active {
+    transform: translateY(0);
+}
+
+#add-todo button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--focus) 35%, transparent), var(--shadow-md);
+}
+
+/* If you're using the SVG icon */
+#circ,
+#pat {
+    stroke: var(--light);
+}
+
+/* List container (inside the scroll wrapper) */
+#todos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Todo item card */
+.toDo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 14px 14px 12px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.toDo:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in oklab, var(--border) 70%, var(--primary));
+}
+
+.check-and-text {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Themed checkbox */
+.check-and-text input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+/* Done state */
+.check-and-text input[type="checkbox"]:checked+span {
+    color: var(--text2);
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: color-mix(in oklab, var(--primary) 55%, var(--text2));
+    opacity: 0.85;
+}
+
+.toDo span {
+    font-size: 1rem;
+    line-height: 1.35;
+    color: var(--text);
+}
+
+/* Delete button */
+.delete-todo {
+    border: 1px solid var(--border);
+    background: var(--light);
+    color: var(--text2);
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 120ms ease, background 120ms ease, color 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+    display: grid;
+    place-items: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.delete-todo:hover {
+    background: color-mix(in oklab, var(--error) 6%, var(--light));
+    color: var(--error);
+    border-color: color-mix(in oklab, var(--error) 20%, var(--border));
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.delete-todo:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--error) 25%, transparent), var(--shadow-md);
+}
+
+.screen-hidden {
+    display: none !important;
+}
+
+
+/* Small screens */
+@media (max-width: 520px) {
+    #add-todo {
+        padding: 6px;
+    }
+
+    #add-todo input {
+        height: 46px;
+    }
+
+    #add-todo button {
+        height: 46px;
+        width: 52px;
+    }
+
+    .toDo {
+        padding: 12px;
+    }
+}

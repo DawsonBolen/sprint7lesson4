@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+</head>
+
+
+<body>
+
+    <div class="app">
+
+
+
+        <div id="form-main">
+
+            <form id="create-account-form">
+                <h2>Create Account</h2>
+                <input class="form-input" id="create-username-input" type="text" name="username" placeholder="username">
+                <input class="form-input" id="create-password-input" type="password" name="password"
+                    placeholder="password">
+                <button class="form-btn" type="submit">Create Account</button>
+
+                <p class="form-link">Already have an account? <span id="show-login-link">Click Here to Login</span></p>
+            </form>
+
+            <form id="login-form">
+                <h2>Login</h2>
+                <input class="form-input" id="login-username-input" type="text" name="username" placeholder="username">
+                <input class="form-input" id="login-password-input" type="password" name="password"
+                    placeholder="password">
+                <button class="form-btn" type="submit">Login</button>
+
+                <p class="form-link">Don't have an account? <span id="show-create-account-link">Click Here to create
+                        one</span></p>
+            </form>
+
+        </div>
+
+        <div id="todo-main">
+            <form id="add-todo">
+                <input type="text" placeholder="enter task" id="todo-input">
+                <button type="submit" id="todo-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true" role="img">
+                        <circle id="circ" cx="12" cy="12" r="9" />
+                        <path id="pat" d="M12 8v8M8 12h8" />
+                    </svg>
+
+                </button>
+            </form>
+
+            <div id="todo-container">
+                <div id="todos">
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+</body>
+
+</html>

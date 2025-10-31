@@ -5,19 +5,14 @@ const { open } = require("sqlite");
 const bcrypt = require("bcryptjs");
 const SALT_ROUNDS = 12;
 const cors = require("cors");
+const path = require("path");
 
 (async () => {
   const app = express();
 
-  app.use(cors({
-    origin: [
-      "https://httpie.io",
-      "https://web.httpie.io"
-    ],
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }));
+  app.use(cors());
   app.use(express.json());
+  app.use(express.static(path.join(__dirname, "public")));
 
   const db = await open({ filename: "todo.db", driver: sqlite3.Database });
   await db.exec(`
@@ -60,6 +55,7 @@ const cors = require("cors");
   });
 
 
+
   app.post("/login", async (req, res) => {
     try {
       const { username, password } = req.body;
@@ -76,7 +72,14 @@ const cors = require("cors");
     }
   });
 
-  app.get("user/todos/:user_id", async (req, res) => {
+  app.get("/user/:id", async (req, res) => {
+    const { id } = req.params;
+    const user = (await db.all("SELECT * FROM users WHERE id=?", id));
+    res.json(user)
+
+  })
+
+  app.get("/user/todos/:user_id", async (req, res) => {
     const { user_id } = req.params;
     const todos = await db.all("SELECT * FROM todos WHERE user_id=?", user_id);
     res.json(todos);
@@ -90,7 +93,7 @@ const cors = require("cors");
 
   app.patch("/todos/:id", async (req, res) => {
     const { done } = req.body;
-    await db.run("UPDATE todos SET done=? WHERE id=?", done ? 1 : 0, req.params.id);
+    await db.run("UPDATE todos SET done=? WHERE id=?", [done ? 1 : 0, req.params.id]);
     res.sendStatus(204);
   });
 
