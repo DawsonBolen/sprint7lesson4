@@ -98,16 +98,20 @@ showCreateAccountLink.addEventListener("click", showCreateAccountForm);
 showLoginLink.addEventListener("click", showLoginForm)
 
 
-window.onload = function () {
+function setDisplay() {
     const userId = getCookie("userId")
     if (userId) {
         showTodoMain();
-        loadTodos(userId);
-
+        console.log(userId)
+        loadTodos(userId)
     } else {
         showLoginForm();
     }
 }
+
+
+setDisplay();
+
 
 
 createAccountForm.addEventListener("submit", function (e) {
@@ -115,7 +119,6 @@ createAccountForm.addEventListener("submit", function (e) {
     const usernameText = createUsenameInput.value.trim();
     const passwordText = createPasswordInput.value.trim();
     createAccount(usernameText, passwordText);
-    //we prevent default so we must clear manually
     createUsenameInput.value = '';
     createPasswordInput.value = '';
     showLoginForm();
@@ -165,7 +168,7 @@ async function loadTodos(user_id) {
         if (!response.ok) throw new Error("Failed to load todos");
 
         const todos = await response.json();
-        if (!Array.isArray(todos)) throw new Error("Todos response is not an array");
+     
 
         todoBody.innerHTML = "";
         todos.forEach((todo) => {
@@ -194,37 +197,31 @@ loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const usernameVal = loginUsernameInput.value.trim();
     const passwordVal = loginPasswordInput.value.trim();
-
     try {
         const response = await fetch("http://localhost:3000/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username: usernameVal, password: passwordVal })
         });
-
         if (!response.ok) {
             alert("Incorrect credentials");
-            return; // stay on the login screen if incorrect
-        }
-
-        const data = await response.json();
-        if (!data || data.id == null) {
-            alert("Login response malformed.");
             return;
         }
-
-        // we need a way to save the user that persists across page refreshes so local storage will do, cookies would also work
+        const data = await response.json();
         setCookie("userId", String(data.id), 3600);
-
         loginUsernameInput.value = "";
         loginPasswordInput.value = "";
         showTodoMain();
+
         loadTodos(data.id);
+
+
     } catch (error) {
         console.error(error);
         alert("Network error. Please try again.");
     }
 });
+
 
 toDoForm.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -233,14 +230,8 @@ toDoForm.addEventListener("submit", function (e) {
 
     let userId = getCookie("userId");
     let text = textInput.value.trim();
-
-
-
     postTodo(text, userId);
     textInput.value = "";
-
-
-
     loadTodos(userId);
 
 
